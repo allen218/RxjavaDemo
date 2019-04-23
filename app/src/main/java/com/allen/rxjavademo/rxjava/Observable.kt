@@ -14,4 +14,8 @@ class Observable<T>(val onSubscribe: ObservableOnSubscribe<T>) {
     fun subscribe(observer: Observer<in T>) {
         onSubscribe.subscribe(observer)
     }
+
+    fun <R> map(function: Function<in T, out R>): Observable<R> {
+        return Observable(OnSubscribeLift(onSubscribe, function))
+    }
 }

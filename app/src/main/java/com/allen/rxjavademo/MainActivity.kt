@@ -3,6 +3,7 @@ package com.allen.rxjavademo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.allen.rxjavademo.rxjava.Function
 import com.allen.rxjavademo.rxjava.Observable
 import com.allen.rxjavademo.rxjava.ObservableOnSubscribe
 import com.allen.rxjavademo.rxjava.Observer
@@ -23,8 +24,13 @@ class MainActivity : AppCompatActivity() {
                 observer.onCompleted()
             }
 
-        }).subscribe(object : Observer<String>() {
-            override fun onNext(t: String) {
+        }).map(object : Function<String, Int> {
+            override fun apply(t: String): Int {
+                return 1
+            }
+
+        }).subscribe(object : Observer<Int>() {
+            override fun onNext(t: Int) {
                 Log.i(TAG, "current value: $t")
             }
 
