@@ -24,22 +24,26 @@ class MainActivity : AppCompatActivity() {
                 observer.onCompleted()
             }
 
-        }).map(object : Function<String, Int> {
-            override fun apply(t: String): Int {
-                return 1
-            }
-
-        }).subscribe(object : Observer<Int>() {
-            override fun onNext(t: Int) {
-                Log.i(TAG, "current value: $t")
-            }
-
-            override fun onError(t: Throwable) {
-            }
-
-            override fun onCompleted() {
-                Log.i(TAG, "onCompleted()")
-            }
         })
+            .subscirbeIO()
+            .subscirbeMain()
+            .map(object : Function<String, Int> {
+                override fun apply(t: String): Int {
+                    return 1
+                }
+
+            }).subscribe(object : Observer<Int>() {
+                override fun onNext(t: Int) {
+                    Log.i(TAG, "current thread: ${Thread.currentThread().name}")
+                    Log.i(TAG, "current value: $t")
+                }
+
+                override fun onError(t: Throwable) {
+                }
+
+                override fun onCompleted() {
+                    Log.i(TAG, "onCompleted()")
+                }
+            })
     }
 }

@@ -18,4 +18,12 @@ class Observable<T>(val onSubscribe: ObservableOnSubscribe<T>) {
     fun <R> map(function: Function<in T, out R>): Observable<R> {
         return Observable(OnSubscribeLift(onSubscribe, function))
     }
+
+    fun subscirbeMain(): Observable<T> {
+        return Observable(OnSubcribeMain(this))
+    }
+
+    fun subscirbeIO(): Observable<T> {
+        return Observable(OnSubscribeIO(this))
+    }
 }
